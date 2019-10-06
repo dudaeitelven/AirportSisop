@@ -58,8 +58,8 @@ public class Main {
 
 
 		/* Thread decolagem */
-		new Thread() {
-
+		
+		Thread t1 = new Thread() {
 			@Override
 			public void run() {
 				while ((aHangar.size()-1)!= 0) {
@@ -87,12 +87,11 @@ public class Main {
 				}
 
 			}
-		}.start();
-		
+		};
+		t1.start();
 
 		/* Thread Way10000 */
-		new Thread() {
-
+		Thread t2 = new Thread() {
 			@Override
 			public void run() {
 				while ((aPistaSul.size()-1)!= 0) {
@@ -117,11 +116,11 @@ public class Main {
 				}
 
 			}
-		}.start();
+		};
+		t2.start();
 		
 		/* Thread Way15000 */
-		new Thread() {
-
+		Thread t3 = new Thread() {
 			@Override
 			public void run() {
 				while ((aAirway10000.size()-1)!= 0) {
@@ -146,20 +145,20 @@ public class Main {
 				}
 
 			}
-		}.start();
+		};
+		t3.start();
 		
 		/* Thread Way20000 */
-		new Thread() {
-
+		Thread t4 = new Thread() {
 			@Override
 			public void run() {
 				while ((aAirway15000.size()-1)!= 0) {
 					try {
 						Thread.sleep(4000);
 
-						
 						aAirway20000.add(aAirway15000.get(0));
 						aAirway15000.remove(0);
+						
 						
 						System.out.println("--Airway20000--");
 						
@@ -175,8 +174,38 @@ public class Main {
 				}
 
 			}
-		}.start();
+		};
+		t4.start();
 		
+		try {
+			t1.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			t2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			t3.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			t4.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(" ** Final ** 20.000 **");
+		for (Aviao aAirway : aAirway20000) {
+			System.out.println(aAirway.getIdentificador());
+		}
+	
 
 	}
 
