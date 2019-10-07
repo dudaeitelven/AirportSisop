@@ -25,56 +25,60 @@ public class Main {
 		}
 		System.out.println(" -- Fim Hangar --");
 		
-		 
-		/* Thread decolagem */
+/* Thread Hangar -> PistaSul */
+		
 		Thread t1 = new Thread() {
 			@Override
 			public void run() {
-				while ((aHangar.size()) != 0) {
-					try {
-						Thread.sleep(500);
-
-						Random rand = new Random();
-						int randomNum = rand.nextInt(aHangar.size());
-						
-						/*Add FILA PARA DECOLAGEM*/
-						aPistaDecolagem.add(aHangar.get(randomNum));
-						aHangar.remove(randomNum);
-						
-						System.out.println("--Pista decolagem --");
-						
-						for (Aviao aPista : aPistaDecolagem) {
-							System.out.println(aPista.getIdentificador());
-						}
-						
-						System.out.println("--------");
-						
-					} catch (InterruptedException e) {
-					}
-
-				}
-
-			}
-		};
-
-		/* Thread Way10000 */
-		Thread t2 = new Thread() {
-			@Override
-			public void run() {
-				while ((aPistaDecolagem.size()) != 0) {
+				while (true) {				
 					try {
 						Thread.sleep(1000);
 
+						
+						if((aHangar.size()-1)>= 0){
+							Random rand = new Random();
+							int randomNum = rand.nextInt((aHangar.size() - 1) +1);
+							
+							/*Add FILA PARA DECOLAGEM*/
+							
+							aPistaDecolagem.add(aHangar.get(randomNum));
+							aHangar.remove(randomNum);
+						}			
+						System.out.println("--Pista Sul--");
+						
+						for (Aviao aPista : aPistaDecolagem) {
+							System.out.print(aPista.getIdentificador()+" ");
+						}
+						System.out.println("\n--------");
+						
+					} catch (InterruptedException e) {
+					}
+
+				}
+
+			}
+		};
+		
+
+		/* Thread PistalSul -> Way10000 */
+		Thread t2 = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+				try {
+						Thread.sleep(2000);
+
+						if((aPistaDecolagem.size()-1)>= 0){
 						aAirway10000.add(aPistaDecolagem.get(0));
 						aPistaDecolagem.remove(0);
-						
+						}
 						System.out.println("--Airway10000--");
 						
 						for (Aviao aAirway : aAirway10000) {
-							System.out.println(aAirway.getIdentificador());
+							System.out.print(aAirway.getIdentificador()+" ");
 						}
 						
-						System.out.println("--------");
+						System.out.println("\n--------");
 						
 					} catch (InterruptedException e) {
 					}
@@ -84,25 +88,25 @@ public class Main {
 			}
 		};
 		
-		/* Thread Way15000 */
+		/* Thread Way10000 -> Way15000 */
 		Thread t3 = new Thread() {
 			@Override
 			public void run() {
-				while ((aAirway10000.size()) != 0) {
-					try {
-						Thread.sleep(2000);
+				while (true) {
+				try {
+						Thread.sleep(3000);
 
-						
-						aAirway15000.add(aAirway10000.get(0));
-						aAirway10000.remove(0);
-						
+						if((aAirway10000.size()-1)>=0){
+							aAirway15000.add(aAirway10000.get(0));
+							aAirway10000.remove(0);
+						}
 						System.out.println("--Airway15000--");
 						
 						for (Aviao aAirway : aAirway15000) {
-							System.out.println(aAirway.getIdentificador());
+							System.out.print(aAirway.getIdentificador()+" ");
 						}
 						
-						System.out.println("--------");
+						System.out.println("\n--------");
 						
 					} catch (InterruptedException e) {
 					}
@@ -112,25 +116,27 @@ public class Main {
 			}
 		};
 		
-		/* Thread Way20000 */
+		/* Thread Way15000 -> Way20000 */
 		Thread t4 = new Thread() {
 			@Override
 			public void run() {
-				while ((aAirway15000.size()) != 0) {
-					try {
+				while (true) {
+				try {
 						Thread.sleep(4000);
 
-						aAirway20000.add(aAirway15000.get(0));
-						aAirway15000.remove(0);
 						
+						if((aAirway15000.size()-1)>= 0) {
+							aAirway20000.add(aAirway15000.get(0));
+							aAirway15000.remove(0);
+						}
 						
 						System.out.println("--Airway20000--");
 						
 						for (Aviao aAirway : aAirway20000) {
-							System.out.println(aAirway.getIdentificador());
+							System.out.print(aAirway.getIdentificador()+" ");
 						}
 						
-						System.out.println("--------");
+						System.out.println("\n--------");
 						
 					} catch (InterruptedException e) {
 					}
@@ -139,29 +145,153 @@ public class Main {
 
 			}
 		};
+		
+		
+		/* Thread Way20000 -> Way15000 */
+		Thread t5 = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+				try {
+						Thread.sleep(5000);
+
+						
+						if((aAirway20000.size()-1)>= 0) {
+							aAirway15000.add(aAirway20000.get(0));
+							aAirway20000.remove(0);
+						}
+						
+						System.out.println("--Airway15000--");
+						
+						for (Aviao aAirway : aAirway15000) {
+							System.out.print(aAirway.getIdentificador()+" ");
+						}
+						
+						System.out.println("\n--------");
+						
+					} catch (InterruptedException e) {
+					}
+
+				}
+
+			}
+		};
+		
+		/* Thread Way15000 -> Way10000 */
+		Thread t6 = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+				try {
+						Thread.sleep(6000);
+
+						
+						if((aAirway15000.size()-1)>= 0) {
+							aAirway10000.add(aAirway15000.get(0));
+							aAirway15000.remove(0);
+						}
+						
+						System.out.println("--Airway10000--");
+						
+						for (Aviao aAirway : aAirway10000) {
+							System.out.print(aAirway.getIdentificador()+" ");
+						}
+						
+						System.out.println("\n--------");
+						
+					} catch (InterruptedException e) {
+					}
+
+				}
+
+			}
+		};
+		
+		/* Thread Way10000 -> pistaNorte */
+		Thread t7 = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+				try {
+						Thread.sleep(7000);
+
+						
+						if((aAirway10000.size()-1)>= 0) {
+							aPistaNorte.add(aAirway10000.get(0));
+							aAirway10000.remove(0);
+						}
+						
+						System.out.println("--PistaNorte--");
+						
+						for (Aviao aPNorte : aPistaNorte) {
+							System.out.print(aPNorte.getIdentificador()+" ");
+						}
+						
+						System.out.println("\n--------");
+						
+					} catch (InterruptedException e) {
+					}
+
+				}
+
+			}
+		};
+		
+		/* Thread Way10000 -> pistaNorte */
+		Thread t8 = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+				try {
+						Thread.sleep(8000);
+
+						
+						if((aPistaNorte.size()-1)>= 0) {
+							aHangar.add(aPistaNorte.get(0));
+							aPistaNorte.remove(0);
+						}
+						
+						System.out.println("--Hangar--");
+						
+						for (Aviao aHangar : aHangar) {
+							System.out.print(aHangar.getIdentificador()+" ");
+						}
+						
+						System.out.println("\n--------");
+						
+					} catch (InterruptedException e) {
+					}
+
+				}
+
+			}
+		};
+		
+		
+		
+		
+		
+		
 		
 		t1.start();
 		t2.start();
 		t3.start();
 		t4.start();
-		
-		try {
-			t1.join();
-			t2.join();
-			t3.join();
-			t4.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		t5.start();
+		t6.start();
+		t7.start();
+		t8.start();
 		
 		
 		
-		System.out.println(" ** 20.000 **");
+		/*
+		System.out.println(" ** Final ** 20.000 **");
 		for (Aviao aAirway : aAirway20000) {
 			System.out.println(aAirway.getIdentificador());
 		}
+		*/
+	
 
 	}
-
 
 }
