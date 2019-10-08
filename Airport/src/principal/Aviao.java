@@ -1,13 +1,12 @@
 package principal;
 
-import java.util.Random;
-
 public class Aviao extends Thread{
 	private int identificador;
 	private int tempoSubir;
 	private int tempoDescer;
 	private boolean subir;
 	private boolean descer;
+
 	public Aviao(int identificador,int tempoSubir,int tempoDescer,boolean subir,boolean descer) {
 		super();
 		this.identificador = identificador;
@@ -24,9 +23,6 @@ public class Aviao extends Thread{
 	public void setIdentificador(int identificador) {
 		this.identificador = identificador;
 	}
-
-	
-	
 
 	public int getTempoSubir() {
 		return tempoSubir;
@@ -60,16 +56,11 @@ public class Aviao extends Thread{
 		this.descer = descer;
 	}
 
-
 	public void run() {
-		long count = 0;
-
 		while (true) {
 			try {
 				Thread.sleep(30);
-				//this.mover();
-	
-				
+
 				if(subir==false) {
 					tempoSubir = tempoSubir -1;
 					if((tempoSubir == 0)) {
@@ -82,9 +73,7 @@ public class Aviao extends Thread{
 					if((tempoDescer == 0)) {
 						descer = true;					
 					}
-				}
-				
-				
+				}	
 				
 			} catch (InterruptedException e) {
 			}
