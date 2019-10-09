@@ -12,8 +12,8 @@ public class GerenciarAvioes {
 	ArrayList<Aviao> aAirway20000 = new ArrayList<Aviao>();
 	
 	public void iniciar () {		
-		for (int i = 1; i <= 1; i++) {
-			Aviao aviao = new Aviao(i, 200,200, false,true);
+		for (int i = 1; i <= 2; i++) {
+			Aviao aviao = new Aviao(i, 200, false,true);
 			aHangar.add(aviao);
 		}
 
@@ -26,14 +26,18 @@ public class GerenciarAvioes {
 						Thread.sleep(1000);
 						
 						synchronized(this) {
+						
 							if ((aHangar.size() - 1) >= 0) {
 								Random rand = new Random();
 								int randomNum = rand.nextInt((aHangar.size() - 1) + 1);
-
-								/* Add FILA PARA DECOLAGEM */
-								aFilaDecolagem.add(aHangar.get(randomNum));
-								aHangar.remove(randomNum);
-							}
+								
+								if(aHangar.get(randomNum).getSubir() == true) {
+									/* Add FILA PARA DECOLAGEM */
+									aFilaDecolagem.add(aHangar.get(randomNum));
+									aHangar.remove(randomNum);
+								}
+								
+								}
 						}
 					} catch (InterruptedException e) {}
 				}
@@ -49,14 +53,16 @@ public class GerenciarAvioes {
 						Thread.sleep(2000);
 
 						// PISTA DECOLAGEM
-						synchronized(this) {
+						synchronized(this) {							
 							if ((aFilaDecolagem.size() - 1) >= 0) {
-								try {
-									aFilaDecolagem.get(0).start();
-									aFilaDecolagem.get(0).setSubir(true);
-								} catch (Exception e) {}
-								aAirway10000.add(aFilaDecolagem.get(0));
-								aFilaDecolagem.remove(0);
+								if(aFilaDecolagem.get(0).getSubir() == true) {	
+									try {
+										aFilaDecolagem.get(0).start();
+										aFilaDecolagem.get(0).setAlternar(true);
+									} catch (Exception e) {}
+									aAirway10000.add(aFilaDecolagem.get(0));
+									aFilaDecolagem.remove(0);
+								}
 							}	
 						}	
 					} catch (InterruptedException e) {}
@@ -77,8 +83,8 @@ public class GerenciarAvioes {
 	
 								for (int i = 0; i < aAirway10000.size(); i++) {
 									if (aAirway10000.get(i).getSubir() == true) {
-										aAirway10000.get(i).setTempoSubir(200);
-										aAirway10000.get(i).setSubir(false);
+										aAirway10000.get(i).setTempoAirway(200);
+										aAirway10000.get(i).setAlternar(true);
 										aAirway15000.add(aAirway10000.get(i));
 										aAirway10000.remove(i);
 									}
@@ -102,8 +108,8 @@ public class GerenciarAvioes {
 							if ((aAirway15000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway15000.size(); i++) {
 									if (aAirway15000.get(i).getSubir() == true) {
-										aAirway15000.get(i).setTempoSubir(200);
-										aAirway15000.get(i).setSubir(false);
+										aAirway15000.get(i).setTempoAirway(200);
+										aAirway15000.get(i).setAlternar(true);
 										aAirway20000.add(aAirway15000.get(i));
 										aAirway15000.remove(i);
 									}
@@ -126,9 +132,10 @@ public class GerenciarAvioes {
 						synchronized(this) {
 							if ((aAirway20000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway20000.size(); i++) {
-									if (aAirway20000.get(i).getDescer() == true) {
-										aAirway20000.get(i).setTempoDescer(200);
-										aAirway20000.get(i).setDescer(false);
+									if (aAirway20000.get(i).getSubir() == true) {
+										aAirway20000.get(i).setSubir(false);
+										aAirway20000.get(i).setTempoAirway(200);
+										aAirway20000.get(i).setAlternar(true);
 										aAirway15000.add(aAirway20000.get(i));
 										aAirway20000.remove(i);
 										// break;
@@ -152,9 +159,9 @@ public class GerenciarAvioes {
 						synchronized(this) {
 							if ((aAirway15000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway15000.size(); i++) {
-									if (aAirway15000.get(i).getDescer() == true) {
-										aAirway15000.get(i).setTempoDescer(200);
-										aAirway15000.get(i).setDescer(false);
+									if (aAirway15000.get(i).getSubir() == false) {
+										aAirway15000.get(i).setTempoAirway(200);
+										aAirway15000.get(i).setAlternar(true);
 										aAirway10000.add(aAirway15000.get(i));
 										aAirway15000.remove(i);
 										// break;
@@ -178,9 +185,9 @@ public class GerenciarAvioes {
 						synchronized(this) {
 							if ((aAirway10000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway10000.size(); i++) {
-									if (aAirway10000.get(i).getDescer() == true) {
-										aAirway10000.get(i).setTempoDescer(200);
-										aAirway10000.get(i).setDescer(false);
+									if (aAirway10000.get(i).getSubir() == false) {
+										aAirway10000.get(i).setTempoAirway(200);
+										aAirway10000.get(i).setAlternar(true);
 										aFilaAterrissar.add(aAirway10000.get(i));
 										aAirway10000.remove(i);
 										// break;
@@ -204,9 +211,14 @@ public class GerenciarAvioes {
 						
 						synchronized(this) {
 							if ((aFilaAterrissar.size() - 1) >= 0) {
-								aHangar.add(aFilaAterrissar.get(0));
-								aFilaAterrissar.remove(0);
 								
+								if (aFilaAterrissar.get(0).getSubir() == false) {
+									
+									
+									aHangar.add(aFilaAterrissar.get(0));
+									aHangar.get(0).setSubir(true);
+									aFilaAterrissar.remove(0);
+								}
 							}		
 						}
 					} catch (InterruptedException e) {}
@@ -223,15 +235,17 @@ public class GerenciarAvioes {
 						Thread.sleep(500);
 						
 						synchronized(this) {
-							System.out.println("\n--HANGAR--");
+						
+							
+							System.out.println("\n-----HANGAR-----");
 							for (Aviao aHangar : aHangar) {
 								System.out.print(aHangar.getIdentificador() + " ");
 							}
-							System.out.println("\n--DECOLAGEM--");
+							System.out.println("\n---DECOLAGEM----");
 							for (Aviao aPista : aFilaDecolagem) {
 								System.out.print(aPista.getIdentificador() + " ");
 							}
-							System.out.println("\n--Aterrissagem--");
+							System.out.println("\n--ATERRISSAGEM--");
 							for (Aviao aPista : aFilaAterrissar) {
 								System.out.print(aPista.getIdentificador() + " ");
 							}
@@ -248,8 +262,7 @@ public class GerenciarAvioes {
 							for (Aviao aWay1000 : aAirway20000) {
 								System.out.print(aWay1000.getIdentificador() + " ");
 							}
-	
-							System.out.println("\n--------");
+							System.out.println("\n----------------");
 						}
 					} catch (InterruptedException e) {}
 				}

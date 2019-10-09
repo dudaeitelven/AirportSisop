@@ -2,18 +2,16 @@ package principal;
 
 public class Aviao extends Thread{
 	private int identificador;
-	private int tempoSubir;
-	private int tempoDescer;
+	private int tempoAirway;
+	private boolean alternar;
 	private boolean subir;
-	private boolean descer;
 
-	public Aviao(int identificador,int tempoSubir,int tempoDescer,boolean subir,boolean descer) {
+	public Aviao(int identificador,int tempoAirway,boolean alternar,boolean subir) {
 		super();
 		this.identificador = identificador;
-		this.tempoSubir = tempoSubir;
-		this.tempoDescer = tempoDescer;
+		this.tempoAirway = tempoAirway;
+		this.alternar = alternar;
 		this.subir = subir;
-		this.descer = descer;
 	}
 
 	public int getIdentificador() {
@@ -24,20 +22,20 @@ public class Aviao extends Thread{
 		this.identificador = identificador;
 	}
 
-	public int getTempoSubir() {
-		return tempoSubir;
+	public int getTempoAirway() {
+		return tempoAirway;
 	}
 
-	public void setTempoSubir(int tempoSubir) {
-		this.tempoSubir = tempoSubir;
+	public void setTempoAirway(int tempoAirway) {
+		this.tempoAirway = tempoAirway;
 	}
 
-	public int getTempoDescer() {
-		return tempoDescer;
+	public boolean getAlternar() {
+		return alternar;
 	}
 
-	public void setTempoDescer(int tempoDescer) {
-		this.tempoDescer = tempoDescer;
+	public void setAlternar(boolean alternar) {
+		this.alternar = alternar;
 	}
 
 	public boolean getSubir() {
@@ -47,33 +45,16 @@ public class Aviao extends Thread{
 	public void setSubir(boolean subir) {
 		this.subir = subir;
 	}
-	
-	public boolean getDescer() {
-		return descer;
-	}
-
-	public void setDescer(boolean descer) {
-		this.descer = descer;
-	}
 
 	public void run() {
 		while (true) {
 			try {
 				Thread.sleep(30);
-
-				if(subir==false) {
-					tempoSubir = tempoSubir -1;
-					if((tempoSubir == 0)) {
-						subir = true;						
-					}
+				
+				tempoAirway = tempoAirway -1;
+				if((tempoAirway == 0)) {
+					alternar = true;						
 				}
-
-				if(descer==false) {
-					tempoDescer = tempoDescer -1;
-					if((tempoDescer == 0)) {
-						descer = true;					
-					}
-				}	
 				
 			} catch (InterruptedException e) {
 			}
