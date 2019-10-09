@@ -24,14 +24,16 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(1000);
+						
+						synchronized(this) {
+							if ((aHangar.size() - 1) >= 0) {
+								Random rand = new Random();
+								int randomNum = rand.nextInt((aHangar.size() - 1) + 1);
 
-						if ((aHangar.size() - 1) >= 0) {
-							Random rand = new Random();
-							int randomNum = rand.nextInt((aHangar.size() - 1) + 1);
-
-							/* Add FILA PARA DECOLAGEM */
-							aFilaDecolagem.add(aHangar.get(randomNum));
-							aHangar.remove(randomNum);
+								/* Add FILA PARA DECOLAGEM */
+								aFilaDecolagem.add(aHangar.get(randomNum));
+								aHangar.remove(randomNum);
+							}
 						}
 					} catch (InterruptedException e) {}
 				}
@@ -47,13 +49,15 @@ public class GerenciarAvioes {
 						Thread.sleep(2000);
 
 						// PISTA DECOLAGEM
-						if ((aFilaDecolagem.size() - 1) >= 0) {
-							try {
-								aFilaDecolagem.get(0).start();
-								aFilaDecolagem.get(0).setSubir(true);
-							} catch (Exception e) {}
-							aAirway10000.add(aFilaDecolagem.get(0));
-							aFilaDecolagem.remove(0);
+						synchronized(this) {
+							if ((aFilaDecolagem.size() - 1) >= 0) {
+								try {
+									aFilaDecolagem.get(0).start();
+									aFilaDecolagem.get(0).setSubir(true);
+								} catch (Exception e) {}
+								aAirway10000.add(aFilaDecolagem.get(0));
+								aFilaDecolagem.remove(0);
+							}	
 						}	
 					} catch (InterruptedException e) {}
 				}
