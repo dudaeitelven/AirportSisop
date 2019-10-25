@@ -4,16 +4,64 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GerenciarAvioes {
-	ArrayList<Aviao> aHangar = new ArrayList<Aviao>();
-	ArrayList<Aviao> aFilaDecolagem = new ArrayList<Aviao>();
-	ArrayList<Aviao> aFilaAterrissar = new ArrayList<Aviao>();
-	ArrayList<Aviao> aAirway10000 = new ArrayList<Aviao>();
-	ArrayList<Aviao> aAirway15000 = new ArrayList<Aviao>();
-	ArrayList<Aviao> aAirway20000 = new ArrayList<Aviao>();
-	
-	public void iniciar () {		
-		for (int i = 1; i <= 2; i++) {
-			Aviao aviao = new Aviao(i, 200, false,true);
+	static ArrayList<Aviao> aHangar = new ArrayList<Aviao>();
+	static ArrayList<Aviao> aFilaDecolagem = new ArrayList<Aviao>();
+	static ArrayList<Aviao> aFilaAterrissar = new ArrayList<Aviao>();
+	static ArrayList<Aviao> aAirway10000 = new ArrayList<Aviao>();
+	static ArrayList<Aviao> aAirway15000 = new ArrayList<Aviao>();
+	static ArrayList<Aviao> aAirway20000 = new ArrayList<Aviao>();
+
+	public ArrayList<Aviao> getaHangar() {
+		return aHangar;
+	}
+
+	public void setaHangar(ArrayList<Aviao> aHangar) {
+		this.aHangar = aHangar;
+	}
+
+	public ArrayList<Aviao> getaFilaDecolagem() {
+		return aFilaDecolagem;
+	}
+
+	public void setaFilaDecolagem(ArrayList<Aviao> aFilaDecolagem) {
+		this.aFilaDecolagem = aFilaDecolagem;
+	}
+
+	public ArrayList<Aviao> getaFilaAterrissar() {
+		return aFilaAterrissar;
+	}
+
+	public void setaFilaAterrissar(ArrayList<Aviao> aFilaAterrissar) {
+		this.aFilaAterrissar = aFilaAterrissar;
+	}
+
+	public ArrayList<Aviao> getaAirway10000() {
+		return aAirway10000;
+	}
+
+	public void setaAirway10000(ArrayList<Aviao> aAirway10000) {
+		this.aAirway10000 = aAirway10000;
+	}
+
+	public ArrayList<Aviao> getaAirway15000() {
+		return aAirway15000;
+	}
+
+	public void setaAirway15000(ArrayList<Aviao> aAirway15000) {
+		this.aAirway15000 = aAirway15000;
+	}
+
+	public ArrayList<Aviao> getaAirway20000() {
+		return aAirway20000;
+	}
+
+	public void setaAirway20000(ArrayList<Aviao> aAirway20000) {
+		this.aAirway20000 = aAirway20000;
+	}
+
+	public void iniciar() {
+		for (int i = 1; i <= 20; i++) {
+			Aviao aviao = new Aviao(i, 200, false, true);
 			aHangar.add(aviao);
 		}
 
@@ -24,22 +72,23 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(1000);
-						
-						synchronized(this) {
-						
+
+						synchronized (this) {
+
 							if ((aHangar.size() - 1) >= 0) {
 								Random rand = new Random();
 								int randomNum = rand.nextInt((aHangar.size() - 1) + 1);
-								
-								if(aHangar.get(randomNum).getSubir() == true) {
+
+								if (aHangar.get(randomNum).getSubir() == true) {
 									/* Add FILA PARA DECOLAGEM */
 									aFilaDecolagem.add(aHangar.get(randomNum));
 									aHangar.remove(randomNum);
 								}
-								
-								}
+
+							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -53,19 +102,21 @@ public class GerenciarAvioes {
 						Thread.sleep(2000);
 
 						// PISTA DECOLAGEM
-						synchronized(this) {							
+						synchronized (this) {
 							if ((aFilaDecolagem.size() - 1) >= 0) {
-								if(aFilaDecolagem.get(0).getSubir() == true) {	
+								if (aFilaDecolagem.get(0).getSubir() == true) {
 									try {
 										aFilaDecolagem.get(0).start();
 										aFilaDecolagem.get(0).setAlternar(true);
-									} catch (Exception e) {}
+									} catch (Exception e) {
+									}
 									aAirway10000.add(aFilaDecolagem.get(0));
 									aFilaDecolagem.remove(0);
 								}
-							}	
-						}	
-					} catch (InterruptedException e) {}
+							}
+						}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -77,10 +128,10 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(3000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aAirway10000.size() - 1) >= 0) {
-	
+
 								for (int i = 0; i < aAirway10000.size(); i++) {
 									if (aAirway10000.get(i).getSubir() == true) {
 										aAirway10000.get(i).setTempoAirway(200);
@@ -91,7 +142,8 @@ public class GerenciarAvioes {
 								}
 							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -103,8 +155,8 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(4000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aAirway15000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway15000.size(); i++) {
 									if (aAirway15000.get(i).getSubir() == true) {
@@ -116,7 +168,8 @@ public class GerenciarAvioes {
 								}
 							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -128,8 +181,8 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(5000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aAirway20000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway20000.size(); i++) {
 									if (aAirway20000.get(i).getSubir() == true) {
@@ -143,7 +196,8 @@ public class GerenciarAvioes {
 								}
 							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -155,8 +209,8 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(6000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aAirway15000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway15000.size(); i++) {
 									if (aAirway15000.get(i).getSubir() == false) {
@@ -169,7 +223,8 @@ public class GerenciarAvioes {
 								}
 							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -181,8 +236,8 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(7000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aAirway10000.size() - 1) >= 0) {
 								for (int i = 0; i < aAirway10000.size(); i++) {
 									if (aAirway10000.get(i).getSubir() == false) {
@@ -208,20 +263,20 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(3000);
-						
-						synchronized(this) {
+
+						synchronized (this) {
 							if ((aFilaAterrissar.size() - 1) >= 0) {
-								
-								if (aFilaAterrissar.get(0).getSubir() == false) {
-									
-									
-									aHangar.add(aFilaAterrissar.get(0));
-									aHangar.get(0).setSubir(true);
-									aFilaAterrissar.remove(0);
+								for (int i = 0; i < aFilaAterrissar.size(); i++) {
+									if (aFilaAterrissar.get(i).getSubir() == false) {
+										aHangar.add(aFilaAterrissar.get(i));
+										aHangar.get(i).setSubir(true);
+										aFilaAterrissar.remove(i);
+									}
 								}
-							}		
+							}
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -233,10 +288,9 @@ public class GerenciarAvioes {
 				while (true) {
 					try {
 						Thread.sleep(500);
-						
-						synchronized(this) {
-						
-							
+
+						synchronized (this) {
+
 							System.out.println("\n-----HANGAR-----");
 							for (Aviao aHangar : aHangar) {
 								System.out.print(aHangar.getIdentificador() + " ");
@@ -250,7 +304,7 @@ public class GerenciarAvioes {
 								System.out.print(aPista.getIdentificador() + " ");
 							}
 							System.out.println("\n--AIRWAY 10000--");
-	
+
 							for (Aviao aWay1000 : aAirway10000) {
 								System.out.print(aWay1000.getIdentificador() + " ");
 							}
@@ -264,7 +318,8 @@ public class GerenciarAvioes {
 							}
 							System.out.println("\n----------------");
 						}
-					} catch (InterruptedException e) {}
+					} catch (InterruptedException e) {
+					}
 				}
 			}
 		};
@@ -280,5 +335,5 @@ public class GerenciarAvioes {
 		t8.start();
 
 	}
-	
+
 }
