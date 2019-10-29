@@ -14,11 +14,11 @@ class Tela extends JPanel {
 
 	public Tela() {
 
-		setLayout(new GridBagLayout());
+		setLayout(new GridLayout(15,3));
 
-		restricoes.gridx = 0;
+		restricoes.gridx = 1;
 
-		restricoes.gridy = 0;
+		restricoes.gridy = 2;
 
 		restricoes.fill = 1;
 
@@ -128,7 +128,7 @@ class PainelTipoFlow extends JPanel {
 
 	// ArrayList<JButton> aTela = new ArrayList<JButton>();
 	JButton bAviao = new JButton();
-	// Icon icone = new ImageIcon("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.png");
+	Icon icone = new ImageIcon("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.png");
 
 	public PainelTipoFlow(ArrayList<Aviao> aAviao) {
 
@@ -144,8 +144,12 @@ class PainelTipoFlow extends JPanel {
 							ArrayList<JButton> aTela = new ArrayList<JButton>();
 							Icon icone = new ImageIcon("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.png");
 							for (int i = 0; i < aAviao.size(); i++) {
-								aTela.add(new JButton(String.format("%d", aAviao.get(i).getIdentificador(), icone)));
-
+								bAviao = new JButton();
+								bAviao.setText(String.format("%d", aAviao.get(i).getIdentificador()));
+								bAviao.setIcon(icone);
+								aTela.add(bAviao);
+//							aTela.add(new JButton(String.format("%d", aAviao.get(i).getIdentificador(),icone)));
+//								//aTela.add(new JButton(String.format("%d", aAviao.get(i).getIdentificador(),("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.jpg"))));
 								// aTelaHangar.add(new JButton(String.format("%d", i)));
 							}
 
@@ -153,10 +157,9 @@ class PainelTipoFlow extends JPanel {
 
 								add(aTela.get(i));
 							}
-							sleep(100);
-							for (int i = 0; i < aTela.size(); i++) {
-
-								remove(aTela.get(i));
+							sleep(500);
+							for (int i= 0; i < aTela.size(); i++) {
+								remove(aTela.get(i));	
 							}
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
@@ -186,7 +189,7 @@ class TelaProg extends JFrame {
 
 		});
 
-		setSize(1600, 500);
+		setSize(1000, 500);
 
 		setLocation(150, 150);
 

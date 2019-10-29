@@ -281,50 +281,50 @@ public class GerenciarAvioes {
 			}
 		};
 
-		/* Printa TELA */
-		Thread t9 = new Thread() {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						Thread.sleep(500);
-
-						synchronized (this) {
-
-							System.out.println("\n-----HANGAR-----");
-							for (Aviao aHangar : aHangar) {
-								System.out.print(aHangar.getIdentificador() + " ");
-							}
-							System.out.println("\n---DECOLAGEM----");
-							for (Aviao aPista : aFilaDecolagem) {
-								System.out.print(aPista.getIdentificador() + " ");
-							}
-							System.out.println("\n--ATERRISSAGEM--");
-							for (Aviao aPista : aFilaAterrissar) {
-								System.out.print(aPista.getIdentificador() + " ");
-							}
-							System.out.println("\n--AIRWAY 10000--");
-
-							for (Aviao aWay1000 : aAirway10000) {
-								System.out.print(aWay1000.getIdentificador() + " ");
-							}
-							System.out.println("\n--AIRWAY 15000--");
-							for (Aviao aWay1000 : aAirway15000) {
-								System.out.print(aWay1000.getIdentificador() + " ");
-							}
-							System.out.println("\n--AIRWAY 20000--");
-							for (Aviao aWay1000 : aAirway20000) {
-								System.out.print(aWay1000.getIdentificador() + " ");
-							}
-							System.out.println("\n----------------");
-						}
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-		};
-
-		t9.start();
+//		/* Printa TELA */
+//		Thread t9 = new Thread() {
+//			@Override
+//			public void run() {
+//				while (true) {
+//					try {
+//						Thread.sleep(500);
+//
+//						synchronized (this) {
+//
+//							System.out.println("\n-----HANGAR-----");
+//							for (Aviao aHangar : aHangar) {
+//								System.out.print(aHangar.getIdentificador() + " ");
+//							}
+//							System.out.println("\n---DECOLAGEM----");
+//							for (Aviao aPista : aFilaDecolagem) {
+//								System.out.print(aPista.getIdentificador() + " ");
+//							}
+//							System.out.println("\n--ATERRISSAGEM--");
+//							for (Aviao aPista : aFilaAterrissar) {
+//								System.out.print(aPista.getIdentificador() + " ");
+//							}
+//							System.out.println("\n--AIRWAY 10000--");
+//
+//							for (Aviao aWay1000 : aAirway10000) {
+//								System.out.print(aWay1000.getIdentificador() + " ");
+//							}
+//							System.out.println("\n--AIRWAY 15000--");
+//							for (Aviao aWay1000 : aAirway15000) {
+//								System.out.print(aWay1000.getIdentificador() + " ");
+//							}
+//							System.out.println("\n--AIRWAY 20000--");
+//							for (Aviao aWay1000 : aAirway20000) {
+//								System.out.print(aWay1000.getIdentificador() + " ");
+//							}
+//							System.out.println("\n----------------");
+//						}
+//					} catch (InterruptedException e) {
+//					}
+//				}
+//			}
+//		};
+//
+//		t9.start();
 		t1.start();
 		t2.start();
 		t3.start();
