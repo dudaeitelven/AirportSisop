@@ -49,7 +49,7 @@ public class Aviao extends Thread{
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(30);
+				Thread.sleep(tempoAirway > 0 ? tempoAirway : tempoAirway * -1);
 				
 				tempoAirway = tempoAirway -1;
 				if((tempoAirway == 0)) {

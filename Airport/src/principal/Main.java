@@ -7,10 +7,6 @@ public class Main {
         gerenciarAvioes.iniciar();
 		TelaProg tela = new TelaProg();
 		tela.MostraTela();
-		
-	
-		
-		
 
 	}
 

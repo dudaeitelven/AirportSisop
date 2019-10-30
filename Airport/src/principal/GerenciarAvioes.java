@@ -262,7 +262,7 @@ public class GerenciarAvioes {
 			public void run() {
 				while (true) {
 					try {
-						Thread.sleep(3000);
+						Thread.sleep(500);
 
 						synchronized (this) {
 							if ((aFilaAterrissar.size() - 1) >= 0) {

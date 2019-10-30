@@ -125,11 +125,8 @@ class Tela extends JPanel {
 }
 
 class PainelTipoFlow extends JPanel {
-
-	// ArrayList<JButton> aTela = new ArrayList<JButton>();
 	JButton bAviao = new JButton();
-	Icon icone = new ImageIcon("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.png");
-
+	
 	public PainelTipoFlow(ArrayList<Aviao> aAviao) {
 
 		new Thread() {
@@ -142,19 +139,14 @@ class PainelTipoFlow extends JPanel {
 
 							setLayout(new FlowLayout());
 							ArrayList<JButton> aTela = new ArrayList<JButton>();
-							Icon icone = new ImageIcon("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.png");
+							Icon icone = new ImageIcon("aviao.png");
 							for (int i = 0; i < aAviao.size(); i++) {
 								bAviao = new JButton();
 								bAviao.setText(String.format("%d", aAviao.get(i).getIdentificador()));
 								bAviao.setIcon(icone);
-								aTela.add(bAviao);
-//							aTela.add(new JButton(String.format("%d", aAviao.get(i).getIdentificador(),icone)));
-//								//aTela.add(new JButton(String.format("%d", aAviao.get(i).getIdentificador(),("C:\\Users\\Alex\\Desktop\\SisOP\\aviao.jpg"))));
-								// aTelaHangar.add(new JButton(String.format("%d", i)));
-							}
+								aTela.add(bAviao);							}
 
 							for (int i = 0; i < aTela.size(); i++) {
-
 								add(aTela.get(i));
 							}
 							sleep(500);
@@ -182,14 +174,12 @@ class TelaProg extends JFrame {
 		addWindowListener(new WindowAdapter() {
 
 			public void windowClosing(WindowEvent e) {
-
 				System.exit(0);
-
 			}
 
 		});
 
-		setSize(1000, 500);
+		setSize(1800, 700);
 
 		setLocation(150, 150);
 
